@@ -58,18 +58,15 @@ postcode:
 
 ```
 
-Usage in Controller
--------------------
-
-```
-php
+Usage Services
+--------------
+``` php
 $address = $this->get('usoft.postcode.client')->getAddress('1012JS', 1);
 	
 $address->getStreet();     // Dam
 $address->getCity();       // Amsterdam
 $address->getProvince();   // Noord-Holland
 ```
-
 
 Usage from API
 --------------
