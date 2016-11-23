@@ -39,18 +39,18 @@ class AddressClient
 
     /**
      * @param string $zipcode
-     * @param string $number
+     * @param string $houseNumber
      *
      * @return Address
      */
-    public function getAddress($zipcode, $number)
+    public function getAddress($zipcode, $houseNumber)
     {
         if (0 === preg_match('/^[1-9]{1}[0-9]{3}[\s]{0,1}[a-z]{2}$/i', $zipcode)) {
             return null;
         }
 
         $header = ['X-Api-Key' => $this->apiKey];
-        $url = sprintf('https://postcode-api.apiwise.nl/v2/addresses/?postcode=%s&number=%d', $zipcode, (int) $number);
+        $url = sprintf('https://postcode-api.apiwise.nl/v2/addresses/?postcode=%s&number=%d', $zipcode, (int) $houseNumber);
         $request = new Request('GET', $url, $header);
 
         try {
@@ -60,18 +60,19 @@ class AddressClient
                 throw new InvalidApiResponse('The API does not return a 200 status-code');
             }
 
-            $data = json_encode($response->getBody()->getContents(), true);
+            $data = json_decode($response->getBody()->getContents(), true);
 
             if (false === isset($data['_embedded']['addresses'][0])) {
-                return null;
+                throw new InvalidApiResponse('Address cannot be set from API data');
             }
 
             $address = $data['_embedded']['addresses'][0];
 
             $city = $address['city']['label'];
             $street = $address['street'];
+            $province = $address['province']['label'];
 
-            return new Address($street, $zipcode, $city, $number);
+            return new Address($street, $zipcode, $city, $houseNumber, $province);
 
         } catch (\Exception $exception) {
             throw new InvalidApiResponse($exception->getMessage());

@@ -1,9 +1,9 @@
 services:
     usoft.address.guzzle:
-        class: GuzzleHttp\Client
+      class: GuzzleHttp\Client
 
     usoft.postcode.client:
-        class: Usoft\PostcodeBundle\Services\AddressClient
-        parameters:
-            - "@usoft.address.guzzle"
-            - "%postcode_api_key%"
+      class: Usoft\PostcodeBundle\Services\AddressClient
+      arguments:
+          - "@usoft.address.guzzle"
+          - "%postcode_api_key%"

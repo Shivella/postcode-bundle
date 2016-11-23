@@ -24,21 +24,26 @@ class Address
     /** @var string */
     private $city;
 
-    /** @var string */
+    /** @var integer */
     private $number;
 
+    /** @var string */
+    private $province;
+
     /**
-     * @param string $street
-     * @param string $zipcode
-     * @param string $city
-     * @param string $number
+     * @param string  $street
+     * @param string  $zipcode
+     * @param string  $city
+     * @param integer $number
+     * @param string  $province
      */
-    public function __construct($street, $zipcode, $city, $number)
+    public function __construct($street, $zipcode, $city, $number, $province)
     {
-        $this->street  = $street;
-        $this->zipcode = $zipcode;
-        $this->city    = $city;
-        $this->number  = $number;
+        $this->street   = $street;
+        $this->zipcode  = $zipcode;
+        $this->city     = $city;
+        $this->number   = $number;
+        $this->province = $province;
     }
 
     /**
@@ -66,11 +71,19 @@ class Address
     }
 
     /**
-     * @return string
+     * @return integer
      */
     public function getNumber()
     {
         return $this->number;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProvince()
+    {
+        return $this->province;
     }
 
     /**
@@ -83,6 +96,7 @@ class Address
             'zipcode'       => $this->getZipcode(),
             'city'          => $this->getCity(),
             'house_number'  => $this->getNumber(),
+            'province'      => $this->getProvince(),
         ];
     }
 }

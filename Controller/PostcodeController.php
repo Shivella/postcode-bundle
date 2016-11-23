@@ -29,7 +29,7 @@ class PostcodeController extends Controller
     {
         try {
             $postcode    = $request->get('postcode');
-            $houseNumber = $request->get('number');
+            $houseNumber = $request->get('nummer');
 
             $address = $this->get('usoft.postcode.client')->getAddress($postcode, $houseNumber);
 
