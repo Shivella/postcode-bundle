@@ -1,0 +1,4 @@
+usoft_postcode_api:
+    path:     /api/postcode
+    defaults: { _controller: UsoftPostcodeBundle:Postcode:fetch }
+    methods:  [GET]
