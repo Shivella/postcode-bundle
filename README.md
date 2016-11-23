@@ -4,6 +4,8 @@ ApiWise Postcode Bundle
 This bundle can be useed to fetch Address details from zipcode with number.
 An account at ApiWise is required.
 
+[![Build Status](https://travis-ci.org/Shivella/postcode-bundle.svg?branch=master)](https://travis-ci.org/Shivella/postcode-bundle) [![Latest Stable Version](https://poser.pugx.org/shivella/postcode-bundle/v/stable)](https://packagist.org/packages/shivella/postcode-bundle) [![License](https://poser.pugx.org/shivella/postcode-bundle/license)](https://packagist.org/packages/shivella/postcode-bundle) [![Total Downloads](https://poser.pugx.org/shivella/postcode-bundle/downloads)](https://packagist.org/packages/shivella/postcode-bundle) [![Coverage Status](https://coveralls.io/repos/github/Shivella/postcode-bundle/badge.svg)](https://coveralls.io/github/Shivella/postcode-bundle)
+
 Installation
 ------------
 Installation is a quick 3 step process:
