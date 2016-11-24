@@ -76,7 +76,15 @@ class AddressClient
             $street = $address['street'];
             $province = $address['province']['label'];
 
-            return new Address($street, $postcode, $city, $houseNumber, $province);
+            $geoLocation = [
+                'latitude'  => isset($address['geo']['center']['wgs84']['coordinates'][1]) ? $address['geo']['center']['wgs84']['coordinates'][0] : null,
+                'longitude' => isset($address['geo']['center']['wgs84']['coordinates'][0]) ? $address['geo']['center']['wgs84']['coordinates'][1] : null,
+            ];
+
+            $address = new Address($street, $postcode, $city, $houseNumber, $province);
+            $address->setGeoLocation($geoLocation);
+
+            return $address;
 
         } catch (\Exception $exception) {
             throw new InvalidApiResponseException($exception->getMessage());

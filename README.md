@@ -65,9 +65,10 @@ Usage Services
 ``` php
 $address = $this->get('usoft.postcode.client')->getAddress('1012JS', 1);
 	
-$address->getStreet();     // Dam
-$address->getCity();       // Amsterdam
-$address->getProvince();   // Noord-Holland
+$address->getStreet();      // Dam
+$address->getCity();        // Amsterdam
+$address->getProvince();    // Noord-Holland
+$address->getGeoLocation(); // array('latitude' => 52.3732926, 'longitude' => 4.8937176)
 ```
 
 Usage from API
