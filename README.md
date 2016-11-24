@@ -68,6 +68,8 @@ $address = $this->get('usoft.postcode.client')->getAddress('1012JS', 1);
 $address->getStreet();      // Dam
 $address->getCity();        // Amsterdam
 $address->getProvince();    // Noord-Holland
+$address->getNumber();      // 1
+$address->getZipcode();     // 1012JS
 $address->getGeoLocation(); // array('latitude' => 52.3732926, 'longitude' => 4.8937176)
 ```
 
@@ -76,4 +78,4 @@ Usage from API
 
 Or try the API response:
 
-http://127.0.0.1:8000/api/postcode?postcode=1012JS&nummer=3
+http://127.0.0.1:8000/api/postcode?postcode=2011WD&nummer=2

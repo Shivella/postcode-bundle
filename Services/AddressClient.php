@@ -50,7 +50,7 @@ class AddressClient
     public function getAddress($postcode, $houseNumber)
     {
         if (0 === preg_match('/^[1-9]{1}[0-9]{3}[\s]{0,1}[a-z]{2}$/i', $postcode)) {
-            throw new InvalidPostcodeException('The API does not return a 200 status-code');
+            throw new InvalidPostcodeException('Given postcode incorrect');
         }
 
         $header = ['X-Api-Key' => $this->apiKey];

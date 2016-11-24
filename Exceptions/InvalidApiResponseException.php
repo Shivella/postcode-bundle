@@ -13,7 +13,7 @@ namespace Usoft\PostcodeBundle\Exceptions;
  *
  * @author Wessel Strengholt <wessel.strengholt@gmail.com>
  */
-class InvalidApiResponseException extends \RuntimeException
+class InvalidApiResponseException extends \Exception
 {
 
 }
