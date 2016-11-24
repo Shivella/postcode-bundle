@@ -11,7 +11,8 @@ namespace Usoft\PostcodeBundle\Services;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Usoft\PostcodeBundle\Exceptions\InvalidApiResponse;
+use Usoft\PostcodeBundle\Exceptions\InvalidApiResponseException;
+use Usoft\PostcodeBundle\Exceptions\InvalidPostcodeException;
 use Usoft\PostcodeBundle\Model\Address;
 
 /**
@@ -38,32 +39,35 @@ class AddressClient
     }
 
     /**
-     * @param string $zipcode
-     * @param string $houseNumber
+     * @param string  $postcode
+     * @param integer $houseNumber
+     *
+     * @throws InvalidPostcodeException
+     * @throws InvalidApiResponseException
      *
      * @return Address
      */
-    public function getAddress($zipcode, $houseNumber)
+    public function getAddress($postcode, $houseNumber)
     {
-        if (0 === preg_match('/^[1-9]{1}[0-9]{3}[\s]{0,1}[a-z]{2}$/i', $zipcode)) {
-            return null;
+        if (0 === preg_match('/^[1-9]{1}[0-9]{3}[\s]{0,1}[a-z]{2}$/i', $postcode)) {
+            throw new InvalidPostcodeException('The API does not return a 200 status-code');
         }
 
         $header = ['X-Api-Key' => $this->apiKey];
-        $url = sprintf('https://postcode-api.apiwise.nl/v2/addresses/?postcode=%s&number=%d', $zipcode, (int) $houseNumber);
+        $url = sprintf('https://postcode-api.apiwise.nl/v2/addresses/?postcode=%s&number=%d', $postcode, (int) $houseNumber);
         $request = new Request('GET', $url, $header);
 
         try {
             $response = $this->client->send($request);
 
             if ($response->getStatusCode() !== Response::HTTP_OK) {
-                throw new InvalidApiResponse('The API does not return a 200 status-code');
+                throw new InvalidApiResponseException('The API does not return a 200 status-code');
             }
 
             $data = json_decode($response->getBody()->getContents(), true);
 
             if (false === isset($data['_embedded']['addresses'][0])) {
-                throw new InvalidApiResponse('Address cannot be set from API data');
+                throw new InvalidApiResponseException('Address cannot be set from API data');
             }
 
             $address = $data['_embedded']['addresses'][0];
@@ -72,10 +76,10 @@ class AddressClient
             $street = $address['street'];
             $province = $address['province']['label'];
 
-            return new Address($street, $zipcode, $city, $houseNumber, $province);
+            return new Address($street, $postcode, $city, $houseNumber, $province);
 
         } catch (\Exception $exception) {
-            throw new InvalidApiResponse($exception->getMessage());
+            throw new InvalidApiResponseException($exception->getMessage());
         }
     }
 }

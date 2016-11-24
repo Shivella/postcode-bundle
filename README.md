@@ -8,7 +8,7 @@ An account at ApiWise is required.
 
 Installation
 ------------
-Installation is a quick 3 step process:
+Installation is a quick 4 step process:
 
 1. Download postcode-bundle using composer
 2. Enable the Bundle in AppKernel.php
@@ -75,4 +75,4 @@ Usage from API
 
 Or try the API response:
 
-http://127.0.0.1:8000/api/postcode?postcode=1012JS&nummer=1
+http://127.0.0.1:8000/api/postcode?postcode=1012JS&nummer=3

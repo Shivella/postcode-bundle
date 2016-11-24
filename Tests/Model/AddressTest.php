@@ -20,12 +20,14 @@ class AddressTest extends \PHPUnit_Framework_TestCase
     public function testAddress()
     {
         $address = new Address('Test Street', '1010AB', 'Haarlem', 666, 'Noord-Holland');
+        $address->setGeoLocation(['lat' => 42.3243, 'long' => 32.3424]);
 
         $this->assertSame($address->getStreet(), 'Test Street');
         $this->assertSame($address->getZipcode(), '1010AB');
         $this->assertSame($address->getCity(), 'Haarlem');
         $this->assertSame($address->getNumber(), 666);
         $this->assertSame($address->getProvince(), 'Noord-Holland');
+        $this->assertSame($address->getGeoLocation(), ['lat' => 42.3243, 'long' => 32.3424]);
 
         $this->assertSame([
             'street'        => 'Test Street',
@@ -33,6 +35,7 @@ class AddressTest extends \PHPUnit_Framework_TestCase
             'city'          => 'Haarlem',
             'house_number'  => 666,
             'province'      => 'Noord-Holland',
+            'geo_location'  => ['lat' => 42.3243, 'long' => 32.3424],
         ], $address->toArray());
     }
 }

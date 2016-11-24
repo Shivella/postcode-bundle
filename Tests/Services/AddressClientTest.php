@@ -65,6 +65,60 @@ class AddressClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @expectedException \Usoft\PostcodeBundle\Exceptions\InvalidPostcodeException
+     */
+    public function testGetAddressWithInvalidPostcode()
+    {
+        $this->guzzle->expects($this->never())
+            ->method('send');
+
+        $this->addressClient->getAddress('*@NXNI@', 18);
+    }
+
+    /**
+     * @expectedException \Usoft\PostcodeBundle\Exceptions\InvalidApiResponseException
+     */
+    public function testGetAddressWithInvalidResponse()
+    {
+        $this->guzzle->expects($this->once())
+            ->method('send')
+            ->willReturn($this->response);
+
+        $this->response->expects($this->once())
+            ->method('getStatusCode')
+            ->willReturn(401);
+
+        $this->response->expects($this->never())
+            ->method('getBody');
+
+        $this->addressClient->getAddress('1010AB', 18);
+    }
+
+    /**
+     * @expectedException \Usoft\PostcodeBundle\Exceptions\InvalidApiResponseException
+     */
+    public function testGetAddressWithInvalidJsonResponse()
+    {
+        $this->guzzle->expects($this->once())
+            ->method('send')
+            ->willReturn($this->response);
+
+        $this->response->expects($this->once())
+            ->method('getStatusCode')
+            ->willReturn(200);
+
+        $this->response->expects($this->once())
+            ->method('getBody')
+            ->willReturn($this->stream);
+
+        $this->stream->expects($this->once())
+            ->method('getContents')
+            ->willReturn(file_get_contents(__DIR__ . '/invalid.json'));
+
+        $this->addressClient->getAddress('1010AB', 18);
+    }
+
+    /**
      * @return \PHPUnit_Framework_MockObject_MockObject|ClientInterface
      */
     private function createClientInterfaceMock()

@@ -30,6 +30,9 @@ class Address
     /** @var string */
     private $province;
 
+    /** @var array */
+    private $geoLocation;
+
     /**
      * @param string  $street
      * @param string  $zipcode
@@ -89,6 +92,22 @@ class Address
     /**
      * @return array
      */
+    public function getGeoLocation()
+    {
+        return $this->geoLocation;
+    }
+
+    /**
+     * @param array $geoLocation
+     */
+    public function setGeoLocation($geoLocation)
+    {
+        $this->geoLocation = $geoLocation;
+    }
+
+    /**
+     * @return array
+     */
     public function toArray()
     {
         return [
@@ -97,6 +116,7 @@ class Address
             'city'          => $this->getCity(),
             'house_number'  => $this->getNumber(),
             'province'      => $this->getProvince(),
+            'geo_location'  => $this->getGeoLocation(),
         ];
     }
 }
