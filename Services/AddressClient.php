@@ -77,8 +77,8 @@ class AddressClient
             $province = $address['province']['label'];
 
             $geoLocation = [
-                'latitude'  => isset($address['geo']['center']['wgs84']['coordinates'][1]) ? $address['geo']['center']['wgs84']['coordinates'][0] : null,
-                'longitude' => isset($address['geo']['center']['wgs84']['coordinates'][0]) ? $address['geo']['center']['wgs84']['coordinates'][1] : null,
+                'longitude'  => isset($address['geo']['center']['wgs84']['coordinates'][1]) ? $address['geo']['center']['wgs84']['coordinates'][0] : null,
+                'latitude' => isset($address['geo']['center']['wgs84']['coordinates'][0]) ? $address['geo']['center']['wgs84']['coordinates'][1] : null,
             ];
 
             $address = new Address($street, $postcode, $city, $houseNumber, $province);
