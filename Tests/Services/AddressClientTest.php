@@ -9,10 +9,8 @@
 namespace Usoft\PostcodeBundle\Tests\Services;
 
 use GuzzleHttp\ClientInterface;
-use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
-use Usoft\PostcodeBundle\Model\Address;
 use Usoft\PostcodeBundle\Services\AddressClient;
 
 /**
@@ -28,7 +26,7 @@ class AddressClientTest extends \PHPUnit_Framework_TestCase
     /** @var \PHPUnit_Framework_MockObject_MockObject|ClientInterface */
     private $guzzle;
 
-    /** @var \PHPUnit_Framework_MockObject_MockObject|RequestInterface */
+    /** @var \PHPUnit_Framework_MockObject_MockObject|ResponseInterface */
     private $response;
 
     /** @var \PHPUnit_Framework_MockObject_MockObject|StreamInterface */
@@ -36,9 +34,9 @@ class AddressClientTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->guzzle = $this->createClientInterfaceMock();
+        $this->guzzle   = $this->createClientInterfaceMock();
         $this->response = $this->createResponseInterfaceMock();
-        $this->stream = $this->createStreamInterfaceMock();
+        $this->stream   = $this->createStreamInterfaceMock();
 
         $this->addressClient = new AddressClient($this->guzzle, 'secret-key');
     }
@@ -61,7 +59,7 @@ class AddressClientTest extends \PHPUnit_Framework_TestCase
             ->method('getContents')
             ->willReturn(file_get_contents(__DIR__ . '/response.json'));
 
-        $this->assertInstanceOf(Address::class, $this->addressClient->getAddress('1010AB', 18));
+        $this->assertInstanceOf('Usoft\PostcodeBundle\Model\Address', $this->addressClient->getAddress('1010AB', 18));
     }
 
     /**
@@ -123,7 +121,7 @@ class AddressClientTest extends \PHPUnit_Framework_TestCase
      */
     private function createClientInterfaceMock()
     {
-        return $this->getMock(ClientInterface::class);
+        return $this->getMock('GuzzleHttp\ClientInterface');
     }
 
     /**
@@ -131,7 +129,7 @@ class AddressClientTest extends \PHPUnit_Framework_TestCase
      */
     private function createResponseInterfaceMock()
     {
-        return $this->getMock(ResponseInterface::class);
+        return $this->getMock('Psr\Http\Message\ResponseInterface');
     }
 
     /**
@@ -139,6 +137,6 @@ class AddressClientTest extends \PHPUnit_Framework_TestCase
      */
     private function createStreamInterfaceMock()
     {
-        return $this->getMock(StreamInterface::class);
+        return $this->getMock('Psr\Http\Message\StreamInterface');
     }
 }
