@@ -2,7 +2,7 @@ ApiWise Postcode Bundle
 =======================
 
 This bundle can be useed to fetch Address details from zipcode with number.
-An account at ApiWise is required.
+An account at Apiwise is required. For more information please take a look at: https://www.postcodeapi.nu
 
 [![Build Status](https://travis-ci.org/Shivella/postcode-bundle.svg?branch=master)](https://travis-ci.org/Shivella/postcode-bundle) [![Latest Stable Version](https://poser.pugx.org/shivella/postcode-bundle/v/stable)](https://packagist.org/packages/shivella/postcode-bundle) [![License](https://poser.pugx.org/shivella/postcode-bundle/license)](https://packagist.org/packages/shivella/postcode-bundle) [![Total Downloads](https://poser.pugx.org/shivella/postcode-bundle/downloads)](https://packagist.org/packages/shivella/postcode-bundle) [![Coverage Status](https://coveralls.io/repos/github/Shivella/postcode-bundle/badge.svg)](https://coveralls.io/github/Shivella/postcode-bundle)
 
@@ -12,7 +12,7 @@ Installation is a quick 4 step process:
 
 1. Download postcode-bundle using composer
 2. Enable the Bundle in AppKernel.php
-3. Configure ApiWise credentials
+3. Configure Apiwise credentials
 4. Add routes
 
 ### Step 1: Download postcode-bundle using composer
@@ -39,11 +39,11 @@ public function registerBundles()
 }
 ```
 
-### Step 3: Configure ApiWise credentials
+### Step 3: Configure Apiwise credentials
 ```yaml
 # app/config/config.yml
 
-# ApiWise Postcode API
+# Apiwise Postcode API
 usoft_postcode:
     apiwise:
         key: secret_api_wise_key
