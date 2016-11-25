@@ -1,4 +1,4 @@
-ApiWise Postcode Bundle
+Apiwise Postcode Bundle
 =======================
 
 This bundle can be useed to fetch Address details from zipcode with number.
