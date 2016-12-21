@@ -30,7 +30,7 @@ class UsoftPostcodeExtension extends Extension
 
         $container->setParameter('postcode_api_key', $config['apiwise']['key']);
 
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
     }
 }
