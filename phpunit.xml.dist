@@ -15,7 +15,7 @@
     </php>
 
     <testsuites>
-        <testsuite name="ApiWise Postcode Symfony3 bundle">
+        <testsuite name="Apiwise Postcode Symfony3 bundle">
             <directory>./Tests/</directory>
         </testsuite>
     </testsuites>

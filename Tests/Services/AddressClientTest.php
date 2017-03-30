@@ -8,6 +8,7 @@
 
 namespace Usoft\PostcodeBundle\Tests\Services;
 
+use PHPUnit\Framework\TestCase;
 use GuzzleHttp\ClientInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
@@ -18,7 +19,7 @@ use Usoft\PostcodeBundle\Services\AddressClient;
  *
  * @author Wessel Strengholt <wessel.strengholt@gmail.com>
  */
-class AddressClientTest extends \PHPUnit_Framework_TestCase
+class AddressClientTest extends TestCase
 {
     /** @var AddressClient */
     private $addressClient;
@@ -121,7 +122,7 @@ class AddressClientTest extends \PHPUnit_Framework_TestCase
      */
     private function createClientInterfaceMock()
     {
-        return $this->getMock('GuzzleHttp\ClientInterface');
+        return $this->createMock('GuzzleHttp\ClientInterface');
     }
 
     /**
@@ -129,7 +130,7 @@ class AddressClientTest extends \PHPUnit_Framework_TestCase
      */
     private function createResponseInterfaceMock()
     {
-        return $this->getMock('Psr\Http\Message\ResponseInterface');
+        return $this->createMock('Psr\Http\Message\ResponseInterface');
     }
 
     /**
@@ -137,6 +138,6 @@ class AddressClientTest extends \PHPUnit_Framework_TestCase
      */
     private function createStreamInterfaceMock()
     {
-        return $this->getMock('Psr\Http\Message\StreamInterface');
+        return $this->createMock('Psr\Http\Message\StreamInterface');
     }
 }

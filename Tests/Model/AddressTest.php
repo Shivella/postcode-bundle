@@ -8,6 +8,7 @@
 
 namespace Usoft\PostcodeBundle\Tests\Model;
 
+use PHPUnit\Framework\TestCase;
 use Usoft\PostcodeBundle\Model\Address;
 
 /**
@@ -15,7 +16,7 @@ use Usoft\PostcodeBundle\Model\Address;
  *
  * @author Wessel Strengholt <wessel.strengholt@gmail.com>
  */
-class AddressTest extends \PHPUnit_Framework_TestCase
+class AddressTest extends TestCase
 {
     public function testAddress()
     {
