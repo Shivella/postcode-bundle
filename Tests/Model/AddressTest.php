@@ -20,7 +20,7 @@ class AddressTest extends TestCase
 {
     public function testAddress()
     {
-        $address = new Address('Test Street', '1010AB', 'Haarlem', 666, 'Noord-Holland');
+        $address = new Address('Test Street', '1010AB', 'Haarlem', 666, 'Noord-Holland', 'Haarlem');
         $address->setGeoLocation(['lat' => 42.3243, 'long' => 32.3424]);
 
         $this->assertSame($address->getStreet(), 'Test Street');
@@ -28,6 +28,7 @@ class AddressTest extends TestCase
         $this->assertSame($address->getCity(), 'Haarlem');
         $this->assertSame($address->getNumber(), 666);
         $this->assertSame($address->getProvince(), 'Noord-Holland');
+        $this->assertSame($address->getMunicipality(), 'Haarlem');
         $this->assertSame($address->getGeoLocation(), ['lat' => 42.3243, 'long' => 32.3424]);
 
         $this->assertSame([
@@ -36,6 +37,7 @@ class AddressTest extends TestCase
             'city'          => 'Haarlem',
             'house_number'  => 666,
             'province'      => 'Noord-Holland',
+            'municipality'  => 'Haarlem',
             'geo_location'  => ['lat' => 42.3243, 'long' => 32.3424],
         ], $address->toArray());
     }
