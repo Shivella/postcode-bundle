@@ -33,20 +33,25 @@ class Address
     /** @var array */
     private $geoLocation;
 
+    /** @var string */
+    private $municipality;
+
     /**
      * @param string  $street
      * @param string  $zipcode
      * @param string  $city
      * @param integer $number
      * @param string  $province
+     * @param string  $municipality
      */
-    public function __construct($street, $zipcode, $city, $number, $province)
+    public function __construct($street, $zipcode, $city, $number, $province, $municipality)
     {
         $this->street   = $street;
         $this->zipcode  = $zipcode;
         $this->city     = $city;
         $this->number   = $number;
         $this->province = $province;
+        $this->municipality = $municipality;
     }
 
     /**
@@ -84,6 +89,14 @@ class Address
     /**
      * @return string
      */
+    public function getMunicipality()
+    {
+        return $this->municipality;
+    }
+
+    /**
+     * @return string
+     */
     public function getProvince()
     {
         return $this->province;
@@ -116,6 +129,7 @@ class Address
             'city'          => $this->getCity(),
             'house_number'  => $this->getNumber(),
             'province'      => $this->getProvince(),
+            'municipality'  => $this->getMunicipality(),
             'geo_location'  => $this->getGeoLocation(),
         ];
     }

@@ -73,6 +73,7 @@ class AddressClient
             $address = $data['_embedded']['addresses'][0];
 
             $city = $address['city']['label'];
+            $municipality = $address['municipality']['label'];
             $street = $address['street'];
             $province = $address['province']['label'];
 
@@ -81,7 +82,7 @@ class AddressClient
                 'latitude' => isset($address['geo']['center']['wgs84']['coordinates'][0]) ? $address['geo']['center']['wgs84']['coordinates'][1] : null,
             ];
 
-            $address = new Address($street, $postcode, $city, $houseNumber, $province);
+            $address = new Address($street, $postcode, $city, $houseNumber, $province, $municipality);
             $address->setGeoLocation($geoLocation);
 
             return $address;
