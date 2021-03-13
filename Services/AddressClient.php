@@ -54,7 +54,7 @@ class AddressClient
         }
 
         $header = ['X-Api-Key' => $this->apiKey];
-        $url = sprintf('https://postcode-api.apiwise.nl/v2/addresses/?postcode=%s&number=%d', $postcode, (int) $houseNumber);
+        $url = sprintf('https://api.postcodeapi.nu/v3/lookup/%s/%d', $postcode, (int) $houseNumber);
         $request = new Request('GET', $url, $header);
 
         try {
@@ -66,20 +66,18 @@ class AddressClient
 
             $data = json_decode($response->getBody()->getContents(), true);
 
-            if (false === isset($data['_embedded']['addresses'][0])) {
+            if (false === isset($data['street'][0])) {
                 throw new InvalidApiResponseException('Address cannot be set from API data');
             }
 
-            $address = $data['_embedded']['addresses'][0];
-
-            $city = $address['city']['label'];
-            $municipality = $address['municipality']['label'];
-            $street = $address['street'];
-            $province = $address['province']['label'];
+            $city = $data['city'];
+            $municipality = $data['municipality'];
+            $street = $data['street'];
+            $province = $data['province'];
 
             $geoLocation = [
-                'longitude'  => isset($address['geo']['center']['wgs84']['coordinates'][1]) ? $address['geo']['center']['wgs84']['coordinates'][0] : null,
-                'latitude' => isset($address['geo']['center']['wgs84']['coordinates'][0]) ? $address['geo']['center']['wgs84']['coordinates'][1] : null,
+                'longitude'  => isset($data['location']['coordinates'][1]) ? $data['location']['coordinates'][0] : null,
+                'latitude' => isset($data['location']['coordinates'][0]) ? $data['location']['coordinates'][1] : null,
             ];
 
             $address = new Address($street, $postcode, $city, $houseNumber, $province, $municipality);
